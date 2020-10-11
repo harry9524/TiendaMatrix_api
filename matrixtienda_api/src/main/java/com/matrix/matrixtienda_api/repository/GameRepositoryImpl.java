@@ -56,10 +56,11 @@ public class GameRepositoryImpl implements IGameRepository{
 			try {
 				jdbcTemplate.update(
 						"INSERT INTO JUEGOS (NOMBRE, DESCRIPCION, PRECIO_JUEGO, PRECIO_ALQUILER, ID_MARCA, FECHA_LANZAMIENTO) VALUES(?,?,?,?,?,?)", 
-						request.getNombre(), request.getDescripcion(), request.getPrecioJuego(), request.getPrecioAlquiler(), request.getIdMarca(), request.getFechaLanzamiento());
+						request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuegoJuego(), request.getPrecioAlquilerJuego(), 
+						request.getIdMarca(), request.getFechaLanzamientoJuego());
 			} catch (DuplicateKeyException e) {
 				response.setExitoso(false);
-				response.setMensajeError("Ya existe un juego con el nombre ingresado "+request.getNombre());
+				response.setMensajeError("Ya existe un juego con el nombre ingresado "+request.getNombreJuego());
 			}
 
 		}else {
@@ -67,9 +68,8 @@ public class GameRepositoryImpl implements IGameRepository{
 
 			jdbcTemplate.update(
 					"UPDATE JUEGOS SET NOMBRE = ?, DESCRIPCION = ?, PRECIO_JUEGO=?, PRECIO_ALQUILER=?, ID_MARCA=?, FECHA_LANZAMIENTO=? WHERE ID_JUEGO = ? ", 
-					request.getNombre(), request.getDescripcion(), request.getPrecioJuego(), request.getPrecioAlquiler(), request.getIdMarca(), request.getFechaLanzamiento(), 
-					request.getIdJuego());
-
+					request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuegoJuego(), request.getPrecioAlquilerJuego(), request.getIdMarca(),
+					request.getFechaLanzamientoJuego(), request.getIdJuego());
 		}
 
 		if(!response.isExitoso() && response.getMensajeError() != null && response.getMensajeError().length()>0) {

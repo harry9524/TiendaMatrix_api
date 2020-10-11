@@ -5,32 +5,34 @@ import java.io.Serializable;
 public class MarcaDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer idMarca;
-	private String nombre;
-	
-	public MarcaDTO(Integer idMarca, String nombre) {
+	private String nombreMarca;
+
+	public MarcaDTO() {}
+
+	public MarcaDTO(Integer idMarca, String nombreMarca) {
+		super();
 		this.idMarca = idMarca;
-		this.nombre = nombre;
+		this.nombreMarca = nombreMarca;
 	}
-	
+
 	public Integer getIdMarca() {
 		return idMarca;
 	}
 	public void setIdMarca(Integer idMarca) {
 		this.idMarca = idMarca;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombreMarca() {
+		return nombreMarca;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreMarca(String nombreMarca) {
+		this.nombreMarca = nombreMarca;
 	}
+
 	@Override
 	public String toString() {
-		return "MarcaDTO [idMarca=" + idMarca + ", nombre=" + nombre + "]";
+		return "MarcaDTO [idMarca=" + idMarca + ", nombreMarca=" + nombreMarca + "]";
 	}
-	
-	
-	
+
 }

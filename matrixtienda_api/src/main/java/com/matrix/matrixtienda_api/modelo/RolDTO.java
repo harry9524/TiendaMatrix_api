@@ -3,16 +3,18 @@ package com.matrix.matrixtienda_api.modelo;
 import java.io.Serializable;
 
 public class RolDTO implements Serializable{
-	
-private static final long serialVersionUID = 1L;
-	
+
+	private static final long serialVersionUID = 1L;
+
 	private Integer idRol;
-	private String nombre;
-	
-	public RolDTO(Integer idRol, String nombre) {
+	private String 	nombreRol;
+
+	public RolDTO(Integer idRol, String nombreRol) {
 		this.idRol = idRol;
-		this.nombre = nombre;
+		this.nombreRol = nombreRol;
 	}
+	
+	public RolDTO() {}
 	
 	public Integer getIdRol() {
 		return idRol;
@@ -20,15 +22,16 @@ private static final long serialVersionUID = 1L;
 	public void setIdRol(Integer idRol) {
 		this.idRol = idRol;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombreRol() {
+		return nombreRol;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreRol(String nombreRol) {
+		this.nombreRol = nombreRol;
 	}
+
 	@Override
 	public String toString() {
-		return "RolDTO [idRol=" + idRol + ", nombre=" + nombre + "]";
+		return "RolDTO [idRol=" + idRol + ", nombreRol=" + nombreRol + "]";
 	}
-	
+
 }

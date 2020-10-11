@@ -2,37 +2,36 @@ package com.matrix.matrixtienda_api.modelo;
 
 public class ClientDTO {
 
-	public ClientDTO(Integer idCliente, String documento, String tipoDocumento, String primerNombre,
-			String segundoNombre, String primerApellido, String segundoApellido, String celular, String telefono,
-			String email, Integer edad) {
-		this.idCliente = idCliente;
-		this.documento = documento;
-		this.tipoDocumento = tipoDocumento;
-		this.primerNombre = primerNombre;
-		this.segundoNombre = segundoNombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.celular = celular;
-		this.telefono = telefono;
-		this.email = email;
-		this.edad = edad;
-	}
-
-	public ClientDTO() {
-
-	}
-
 	private Integer idCliente;
-	private String documento;
-	private String tipoDocumento;
-	private String primerNombre;
-	private String segundoNombre;
-	private String primerApellido;
-	private String segundoApellido;
-	private String celular;
-	private String telefono;
-	private String email;
-	private Integer edad;
+	private String documentoCliente;
+	private String tipoDocumentoCliente;
+	private String primerNombreCliente;
+	private String segundoNombreCliente;
+	private String primerApellidoCliente;
+	private String segundoApellidoCliente;
+	private String celularCliente;
+	private String telefonoCliente;
+	private String emailCliente;
+	private Integer edadCliente;
+
+	public ClientDTO() {}
+
+	public ClientDTO(Integer idCliente, String documentoCliente, String tipoDocumentoCliente,
+			String primerNombreCliente, String segundoNombreCliente, String primerApellidoCliente,
+			String segundoApellidoCliente, String celularCliente, String telefonoCliente, String emailCliente,
+			Integer edadCliente) {
+		this.idCliente = idCliente;
+		this.documentoCliente = documentoCliente;
+		this.tipoDocumentoCliente = tipoDocumentoCliente;
+		this.primerNombreCliente = primerNombreCliente;
+		this.segundoNombreCliente = segundoNombreCliente;
+		this.primerApellidoCliente = primerApellidoCliente;
+		this.segundoApellidoCliente = segundoApellidoCliente;
+		this.celularCliente = celularCliente;
+		this.telefonoCliente = telefonoCliente;
+		this.emailCliente = emailCliente;
+		this.edadCliente = edadCliente;
+	}
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -42,92 +41,95 @@ public class ClientDTO {
 		this.idCliente = idCliente;
 	}
 
-	public String getDocumento() {
-		return documento;
+	public String getDocumentoCliente() {
+		return documentoCliente;
 	}
 
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setDocumentoCliente(String documentoCliente) {
+		this.documentoCliente = documentoCliente;
 	}
 
-	public String getTipoDocumento() {
-		return tipoDocumento;
+	public String getTipoDocumentoCliente() {
+		return tipoDocumentoCliente;
 	}
 
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+	public void setTipoDocumentoCliente(String tipoDocumentoCliente) {
+		this.tipoDocumentoCliente = tipoDocumentoCliente;
 	}
 
-	public String getPrimerNombre() {
-		return primerNombre;
+	public String getPrimerNombreCliente() {
+		return primerNombreCliente;
 	}
 
-	public void setPrimerNombre(String primerNombre) {
-		this.primerNombre = primerNombre;
+	public void setPrimerNombreCliente(String primerNombreCliente) {
+		this.primerNombreCliente = primerNombreCliente;
 	}
 
-	public String getSegundoNombre() {
-		return segundoNombre;
+	public String getSegundoNombreCliente() {
+		return segundoNombreCliente;
 	}
 
-	public void setSegundoNombre(String segundoNombre) {
-		this.segundoNombre = segundoNombre;
+	public void setSegundoNombreCliente(String segundoNombreCliente) {
+		this.segundoNombreCliente = segundoNombreCliente;
 	}
 
-	public String getPrimerApellido() {
-		return primerApellido;
+	public String getPrimerApellidoCliente() {
+		return primerApellidoCliente;
 	}
 
-	public void setPrimerApellido(String primerApellido) {
-		this.primerApellido = primerApellido;
+	public void setPrimerApellidoCliente(String primerApellidoCliente) {
+		this.primerApellidoCliente = primerApellidoCliente;
 	}
 
-	public String getSegundoApellido() {
-		return segundoApellido;
+	public String getSegundoApellidoCliente() {
+		return segundoApellidoCliente;
 	}
 
-	public void setSegundoApellido(String segundoApellido) {
-		this.segundoApellido = segundoApellido;
+	public void setSegundoApellidoCliente(String segundoApellidoCliente) {
+		this.segundoApellidoCliente = segundoApellidoCliente;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getCelularCliente() {
+		return celularCliente;
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setCelularCliente(String celularCliente) {
+		this.celularCliente = celularCliente;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public String getTelefonoCliente() {
+		return telefonoCliente;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTelefonoCliente(String telefonoCliente) {
+		this.telefonoCliente = telefonoCliente;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailCliente() {
+		return emailCliente;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
 	}
 
-	public Integer getEdad() {
-		return edad;
+	public Integer getEdadCliente() {
+		return edadCliente;
 	}
 
-	public void setEdad(Integer edad) {
-		this.edad = edad;
+	public void setEdadCliente(Integer edadCliente) {
+		this.edadCliente = edadCliente;
 	}
 
 	@Override
 	public String toString() {
-		return "ClienteDTO [idCliente=" + idCliente + ", documento=" + documento + ", tipoDocumento=" + tipoDocumento
-				+ ", primerNombre=" + primerNombre + ", segundoNombre=" + segundoNombre + ", primerApellido="
-				+ primerApellido + ", segundoApellido=" + segundoApellido + ", celular=" + celular + ", telefono="
-				+ telefono + ", email=" + email + ", edad=" + edad + "]";
+		return "ClientDTO [idCliente=" + idCliente + ", documentoCliente=" + documentoCliente
+				+ ", tipoDocumentoCliente=" + tipoDocumentoCliente + ", primerNombreCliente=" + primerNombreCliente
+				+ ", segundoNombreCliente=" + segundoNombreCliente + ", primerApellidoCliente=" + primerApellidoCliente
+				+ ", segundoApellidoCliente=" + segundoApellidoCliente + ", celularCliente=" + celularCliente
+				+ ", telefonoCliente=" + telefonoCliente + ", emailCliente=" + emailCliente + ", edadCliente="
+				+ edadCliente + "]";
 	}
+
 
 }

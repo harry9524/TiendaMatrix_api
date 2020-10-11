@@ -29,11 +29,12 @@ public class ClientRepositoryImpl implements IClientRepository{
 			jdbcTemplate.update(
 					"INSERT INTO CLIENTES (PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, DOCUMENTO, TIPO_DOCUMENTO, "
 					+ " CELULAR, TELEFONO, EMAIL, EDAD) VALUES(?,?,?,?,?,?,?,?,?,?)",
-					request.getPrimerNombre(), request.getSegundoNombre(), request.getPrimerApellido(), request.getSegundoApellido(), request.getDocumento(), request.getTipoDocumento(), 
-					request.getCelular(), request.getTelefono(), request.getEmail(), request.getEdad());
+					request.getPrimerNombreCliente(), request.getSegundoNombreCliente(), request.getPrimerApellidoCliente(), request.getSegundoApellidoCliente(), 
+					request.getDocumentoCliente(), request.getTipoDocumentoCliente(), request.getCelularCliente(), request.getTelefonoCliente(), 
+					request.getEmailCliente(), request.getEdadCliente());
 		} catch (DuplicateKeyException e) {
 			response.setExitoso(false);
-			response.setMensajeError("Ya existe una persona registrada con el documento ingresado "+request.getDocumento());
+			response.setMensajeError("Ya existe una persona registrada con el documento ingresado "+request.getDocumentoCliente());
 		}
 		
 		}else {
@@ -41,9 +42,9 @@ public class ClientRepositoryImpl implements IClientRepository{
 			jdbcTemplate.update(
 					"UPDATE CLIENTES SET PRIMER_NOMBRE = ?, SEGUNDO_NOMBRE =?, PRIMER_APELLIDO =?, SEGUNDO_APELLIDO =?, DOCUMENTO =?, TIPO_DOCUMENTO=?, "
 					+ " CELULAR =?, TELEFONO =?, EMAIL =?, EDAD =?) WHERE ID_CLIENTE =?",
-					request.getPrimerNombre(), request.getSegundoNombre(), request.getPrimerApellido(), request.getSegundoApellido(), request.getDocumento(), request.getTipoDocumento(), 
-					request.getCelular(), request.getTelefono(), request.getEmail(), request.getEdad(), request.getIdCliente());
-			
+					request.getPrimerNombreCliente(), request.getSegundoNombreCliente(), request.getPrimerApellidoCliente(), request.getSegundoApellidoCliente(), 
+					request.getDocumentoCliente(), request.getTipoDocumentoCliente(), request.getCelularCliente(), request.getTelefonoCliente(), 
+					request.getEmailCliente(), request.getEdadCliente(), request.getIdCliente());
 		}
 		
 		if(!response.isExitoso() && response.getMensajeError() != null && response.getMensajeError().length()>0) {
@@ -78,7 +79,7 @@ public class ClientRepositoryImpl implements IClientRepository{
         );
 		
 		if(clienteExistente.isEmpty()) {
-			throw new Exception ("El cliente con Documento "+request.getDocumento()+" no se encuentra registrado, registrese previamente para continuar con la operación.");
+			throw new Exception ("El cliente con Documento "+request.getDocumentoCliente()+" no se encuentra registrado, registrese previamente para continuar con la operación.");
 		}
 		
 		return clienteExistente.get(0);

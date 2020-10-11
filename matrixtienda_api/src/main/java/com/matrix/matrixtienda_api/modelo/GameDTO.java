@@ -1,97 +1,81 @@
 package com.matrix.matrixtienda_api.modelo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class GameDTO implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public GameDTO() {
-		
-	}
-	
-	public GameDTO(Integer idJuego, String nombre, String descripcion, Integer precioJuego, Integer precioAlquiler,
-			Integer idMarca, Date fechaLanzamiento) {
-		this.idJuego = idJuego;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precioJuego = precioJuego;
-		this.precioAlquiler = precioAlquiler;
-		this.idMarca = idMarca;
-		this.fechaLanzamiento = fechaLanzamiento;
-	}
-
 	private Integer idJuego;
-	private String nombre;
-	private String descripcion;
-	private Integer precioJuego;
-	private Integer precioAlquiler;
+	private String 	nombreJuego;
+	private String 	descripcionJuego;
+	private Integer precioJuegoJuego;
+	private Integer precioAlquilerJuego;
 	private Integer idMarca;
-	private Date fechaLanzamiento;
+	private Date 	fechaLanzamientoJuego;
+
+	public GameDTO() {}
+
+	public GameDTO(Integer idJuego, String nombreJuego, String descripcionJuego, Integer precioJuegoJuego,
+			Integer precioAlquilerJuego, Integer idMarca, Date fechaLanzamientoJuego) {
+		this.idJuego = idJuego;
+		this.nombreJuego = nombreJuego;
+		this.descripcionJuego = descripcionJuego;
+		this.precioJuegoJuego = precioJuegoJuego;
+		this.precioAlquilerJuego = precioAlquilerJuego;
+		this.idMarca = idMarca;
+		this.fechaLanzamientoJuego = fechaLanzamientoJuego;
+	}
 
 	public Integer getIdJuego() {
 		return idJuego;
 	}
-
 	public void setIdJuego(Integer idJuego) {
 		this.idJuego = idJuego;
 	}
-
-	public String getNombre() {
-		return nombre;
+	public String getNombreJuego() {
+		return nombreJuego;
 	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreJuego(String nombreJuego) {
+		this.nombreJuego = nombreJuego;
 	}
-
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripcionJuego() {
+		return descripcionJuego;
 	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcionJuego(String descripcionJuego) {
+		this.descripcionJuego = descripcionJuego;
 	}
-
-	public Integer getPrecioJuego() {
-		return precioJuego;
+	public Integer getPrecioJuegoJuego() {
+		return precioJuegoJuego;
 	}
-
-	public void setPrecioJuego(Integer precioJuego) {
-		this.precioJuego = precioJuego;
+	public void setPrecioJuegoJuego(Integer precioJuegoJuego) {
+		this.precioJuegoJuego = precioJuegoJuego;
 	}
-
-	public Integer getPrecioAlquiler() {
-		return precioAlquiler;
+	public Integer getPrecioAlquilerJuego() {
+		return precioAlquilerJuego;
 	}
-
-	public void setPrecioAlquiler(Integer precioAlquiler) {
-		this.precioAlquiler = precioAlquiler;
+	public void setPrecioAlquilerJuego(Integer precioAlquilerJuego) {
+		this.precioAlquilerJuego = precioAlquilerJuego;
 	}
-
 	public Integer getIdMarca() {
 		return idMarca;
 	}
-
 	public void setIdMarca(Integer idMarca) {
 		this.idMarca = idMarca;
 	}
-
-	public Date getFechaLanzamiento() {
-		return fechaLanzamiento;
+	public Date getFechaLanzamientoJuego() {
+		return fechaLanzamientoJuego;
 	}
-
-	public void setFechaLanzamiento(Date fechaLanzamiento) {
-		this.fechaLanzamiento = fechaLanzamiento;
+	public void setFechaLanzamientoJuego(Date fechaLanzamientoJuego) {
+		this.fechaLanzamientoJuego = fechaLanzamientoJuego;
 	}
 
 	@Override
 	public String toString() {
-		return "GameDTO [idJuego=" + idJuego + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioJuego="
-				+ precioJuego + ", precioAlquiler=" + precioAlquiler + ", idMarca=" + idMarca + ", fechaLanzamiento="
-				+ fechaLanzamiento + "]";
+		return "GameDTO [idJuego=" + idJuego + ", nombreJuego=" + nombreJuego + ", descripcionJuego=" + descripcionJuego
+				+ ", precioJuegoJuego=" + precioJuegoJuego + ", precioAlquilerJuego=" + precioAlquilerJuego
+				+ ", idMarca=" + idMarca + ", fechaLanzamientoJuego=" + fechaLanzamientoJuego + "]";
 	}
-	
+
 }

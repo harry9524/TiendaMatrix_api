@@ -34,7 +34,7 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 
 	@Override
 	public GameResponse createUpdateGame(GameRequest request) throws Exception {
-		request.setFechaLanzamiento(new Date());		
+//		request.setFechaLanzamientoJuego(new Date());		
 		return gameRepository.createUpdateGame(request);
 	}
 

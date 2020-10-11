@@ -4,33 +4,38 @@ import java.io.Serializable;
 
 public class PlataformaDTO implements Serializable{
 
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	private Integer idPlataforma;
-	private String nombre;
-	
-	public PlataformaDTO(Integer idPlataforma, String nombre) {
+	private String nombrePlataforma;
+
+	public PlataformaDTO(Integer idPlataforma, String nombrePlataforma) {
 		super();
 		this.idPlataforma = idPlataforma;
-		this.nombre = nombre;
+		this.nombrePlataforma = nombrePlataforma;
 	}
+
+	public PlataformaDTO() {}
 	
 	public Integer getIdPlataforma() {
 		return idPlataforma;
 	}
+
 	public void setIdPlataforma(Integer idPlataforma) {
 		this.idPlataforma = idPlataforma;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public String getNombrePlataforma() {
+		return nombrePlataforma;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setNombrePlataforma(String nombrePlataforma) {
+		this.nombrePlataforma = nombrePlataforma;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "PlataformaDTO [idPlataforma=" + idPlataforma + ", nombre=" + nombre + "]";
+		return "PlataformaDTO [idPlataforma=" + idPlataforma + ", nombrePlataforma=" + nombrePlataforma + "]";
 	}
-	
+
 }
