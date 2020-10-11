@@ -13,15 +13,15 @@ import com.matrix.matrixtienda_api.modelo.RolDTO;
 
 public interface IMatrixTiendaService {
 
-	public GameResponse getGamexId (GameRequest request);
-	public GameResponse registerGame (GameRequest request);
-	public List<MarcaDTO> getMarcas();
-	public List<RolDTO> getRoles();
-	public List<GameDTO> getGames();
-	public List<PlataformaDTO> getPlataformas();
+	public GameDTO getGamexId (GameRequest request) throws Exception;
+	public GameResponse createUpdateGame (GameRequest request) throws Exception;
+	public List<MarcaDTO> getMarcas() throws Exception;
+	public List<RolDTO> getRoles() throws Exception;
+	public List<GameDTO> getGames() throws Exception;
+	public List<PlataformaDTO> getPlataformas() throws Exception;
 	
-	public ClientResponse registerClient (ClientRequest request);
-	public ClientResponse getClientxDocumento (ClientRequest request);
+	public ClientResponse registerClient (ClientRequest request) throws Exception;
+	public ClientResponse getClientxDocumento (ClientRequest request) throws Exception;
 	
 	
 }

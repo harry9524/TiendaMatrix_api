@@ -27,12 +27,9 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	IClientRepository clientRepository;
 	
 	@Override
-	public GameResponse getGamexId(GameRequest request) {
+	public GameDTO getGamexId(GameRequest request) throws Exception {
 		if(request.getIdJuego()== null || request.getIdJuego()==0) {
-			GameResponse response = new GameResponse();
-			response.setExitoso(false);
-			response.setMensajeError("Debe ingresar un criterio de busqueda");
-			return response;
+			throw new Exception ("Debe especificar el idJuego para realizar la consulta");
 		}else {
 			return gameRepository.getGamexId(request);
 		}
@@ -40,13 +37,9 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	}
 
 	@Override
-	public GameResponse registerGame(GameRequest request) {
-		GameResponse reponse = new GameResponse();
-		request.setFechaLanzamiento(new Date());
-		
-		reponse.setExitoso(true);
-		reponse.setMensajeError(null);
-		return reponse;
+	public GameResponse createUpdateGame(GameRequest request) throws Exception {
+		request.setFechaLanzamiento(new Date());		
+		return gameRepository.createUpdateGame(request);
 	}
 
 	@Override
@@ -60,22 +53,22 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	}
 	
 	@Override
-	public List<MarcaDTO> getMarcas() {
+	public List<MarcaDTO> getMarcas() throws Exception {
 		return gameRepository.getMarcas();
 	}
 
 	@Override
-	public List<RolDTO> getRoles() {
+	public List<RolDTO> getRoles() throws Exception {
 		return gameRepository.getRoles();
 	}
 
 	@Override
-	public List<GameDTO> getGames() {
+	public List<GameDTO> getGames() throws Exception {
 		return gameRepository.getGames();
 	}
 	
 	@Override
-	public List<PlataformaDTO> getPlataformas() {
+	public List<PlataformaDTO> getPlataformas() throws Exception {
 		return gameRepository.getPlataformas();
 	}
 	

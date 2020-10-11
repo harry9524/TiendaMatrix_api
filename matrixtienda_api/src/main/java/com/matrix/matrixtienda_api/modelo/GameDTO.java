@@ -8,6 +8,10 @@ public class GameDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	public GameDTO() {
+		
+	}
+	
 	public GameDTO(Integer idJuego, String nombre, String descripcion, Integer precioJuego, Integer precioAlquiler,
 			Integer idMarca, Date fechaLanzamiento) {
 		this.idJuego = idJuego;
