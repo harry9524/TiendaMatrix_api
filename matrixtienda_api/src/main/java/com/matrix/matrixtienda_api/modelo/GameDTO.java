@@ -1,46 +1,31 @@
 package com.matrix.matrixtienda_api.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
-@Entity
-@Table(name="JUEGOS")
-public class GameDTO {
+public class GameDTO implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	public GameDTO(Integer idJuego, String nombre, String descripcion, Integer precioJuego, Integer precioAlquiler,
-			Integer idMarca) {
-		super();
+			Integer idMarca, Date fechaLanzamiento) {
 		this.idJuego = idJuego;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precioJuego = precioJuego;
 		this.precioAlquiler = precioAlquiler;
 		this.idMarca = idMarca;
+		this.fechaLanzamiento = fechaLanzamiento;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_JUEGO", nullable = false)
 	private Integer idJuego;
-	
-	@Column(name = "NOMBRE", nullable = false, unique = true)
 	private String nombre;
-
-	@Column(name = "DESCRIPCION", nullable = false)
 	private String descripcion;
-	
-	@Column(name = "PRECIO_JUEGO", nullable = false)
 	private Integer precioJuego;
-	
-	@Column(name = "PRECIO_ALQUILER", nullable = false)
 	private Integer precioAlquiler;
-	
-	@Column(name = "ID_MARCA", nullable = false)
 	private Integer idMarca;
+	private Date fechaLanzamiento;
 
 	public Integer getIdJuego() {
 		return idJuego;
@@ -89,12 +74,20 @@ public class GameDTO {
 	public void setIdMarca(Integer idMarca) {
 		this.idMarca = idMarca;
 	}
-	
+
+	public Date getFechaLanzamiento() {
+		return fechaLanzamiento;
+	}
+
+	public void setFechaLanzamiento(Date fechaLanzamiento) {
+		this.fechaLanzamiento = fechaLanzamiento;
+	}
+
 	@Override
 	public String toString() {
 		return "GameDTO [idJuego=" + idJuego + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioJuego="
-				+ precioJuego + ", precioAlquiler=" + precioAlquiler + ", idMarca=" + idMarca + "]";
+				+ precioJuego + ", precioAlquiler=" + precioAlquiler + ", idMarca=" + idMarca + ", fechaLanzamiento="
+				+ fechaLanzamiento + "]";
 	}
-	
 	
 }

@@ -1,14 +1,21 @@
 package com.matrix.matrixtienda_api.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
+import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
+import com.matrix.matrixtienda_api.modelo.MarcaDTO;
+import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
+import com.matrix.matrixtienda_api.modelo.RolDTO;
+import com.matrix.matrixtienda_api.repository.IClientRepository;
 import com.matrix.matrixtienda_api.repository.IGameRepository;
-import com.matrix.matrixtienda_api.repository.IGameRepositoryJPA;
 
 @Service
 public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
@@ -17,17 +24,17 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	IGameRepository gameRepository;
 	
 	@Autowired
-	IGameRepositoryJPA gameRepositoryJpa;
+	IClientRepository clientRepository;
 	
 	@Override
-	public GameResponse getGame(GameRequest request) {
+	public GameResponse getGamexId(GameRequest request) {
 		if(request.getIdJuego()== null || request.getIdJuego()==0) {
 			GameResponse response = new GameResponse();
 			response.setExitoso(false);
 			response.setMensajeError("Debe ingresar un criterio de busqueda");
 			return response;
 		}else {
-			return gameRepository.getGame(request);
+			return gameRepository.getGamexId(request);
 		}
 		
 	}
@@ -35,7 +42,7 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	@Override
 	public GameResponse registerGame(GameRequest request) {
 		GameResponse reponse = new GameResponse();
-		gameRepositoryJpa.save(request);
+		request.setFechaLanzamiento(new Date());
 		
 		reponse.setExitoso(true);
 		reponse.setMensajeError(null);
@@ -44,8 +51,32 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 
 	@Override
 	public ClientResponse registerClient(ClientRequest request) {
-		return null;
+		return clientRepository.registerClient(request);
 	}
 
+	@Override
+	public ClientResponse getClientxDocumento(ClientRequest request) {
+		return clientRepository.getClientxDocumento(request);
+	}
+	
+	@Override
+	public List<MarcaDTO> getMarcas() {
+		return gameRepository.getMarcas();
+	}
 
+	@Override
+	public List<RolDTO> getRoles() {
+		return gameRepository.getRoles();
+	}
+
+	@Override
+	public List<GameDTO> getGames() {
+		return gameRepository.getGames();
+	}
+	
+	@Override
+	public List<PlataformaDTO> getPlataformas() {
+		return gameRepository.getPlataformas();
+	}
+	
 }
