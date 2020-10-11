@@ -1,11 +1,10 @@
 package com.matrix.matrixtienda_api.modelo;
 
 public class ClientDTO {
-	
+
 	public ClientDTO(Integer idCliente, String documento, String tipoDocumento, String primerNombre,
 			String segundoNombre, String primerApellido, String segundoApellido, String celular, String telefono,
 			String email, Integer edad) {
-		super();
 		this.idCliente = idCliente;
 		this.documento = documento;
 		this.tipoDocumento = tipoDocumento;
@@ -17,6 +16,10 @@ public class ClientDTO {
 		this.telefono = telefono;
 		this.email = email;
 		this.edad = edad;
+	}
+
+	public ClientDTO() {
+
 	}
 
 	private Integer idCliente;
@@ -126,5 +129,5 @@ public class ClientDTO {
 				+ primerApellido + ", segundoApellido=" + segundoApellido + ", celular=" + celular + ", telefono="
 				+ telefono + ", email=" + email + ", edad=" + edad + "]";
 	}
-	
+
 }

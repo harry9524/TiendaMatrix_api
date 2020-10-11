@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
@@ -43,6 +44,7 @@ public class MatrixTiendaController {
 		
 		@GetMapping("/getMarcas")
 		public List<MarcaDTO> getMarcas() throws Exception{
+			log.info("Entro en el metodo getMarcas");
 			return service.getMarcas();
 		}
 		
@@ -59,6 +61,7 @@ public class MatrixTiendaController {
 		
 		@GetMapping("/getGames")
 		public List<GameDTO> getGames() throws Exception{
+			log.info("Entro en el metodo getGames");
 			return service.getGames();
 		}
 		
@@ -68,13 +71,23 @@ public class MatrixTiendaController {
 			return service.createUpdateGame(request);
 		}
 		
-		@PostMapping("/registerClient")
-		public ClientResponse registerClient(@RequestBody ClientRequest request) throws Exception{
-			return service.registerClient(request);
+		@GetMapping("/getClients")
+		public List<ClientDTO> getClients() throws Exception{
+			log.info("Entro en el metodo getClients ");
+			return service.getClients();
 		}
-	
-		@GetMapping("/getClientxDocumento")
-		public ClientResponse getClientxDocumento(@RequestBody ClientRequest request) throws Exception{
-			return service.getClientxDocumento(request);
+		
+		@PostMapping("/createUpdateClient")
+		public ClientResponse createUpdateClient(@RequestBody ClientRequest request) throws Exception{
+			log.info("Entro en el metodo createUpdateClient "+request.toString());
+			return service.createUpdateClient(request);
+		}
+		
+		@GetMapping("/getClientxId/{idCliente}")
+		public ClientDTO getClientxId(@PathVariable("idCliente") Integer idCliente) throws Exception{
+			log.info("Entro en el metodo getClientxId "+idCliente);
+			ClientRequest request = new ClientRequest();
+			request.setIdCliente(idCliente);
+			return service.getClientxId(request);
 		}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
@@ -22,18 +23,13 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 
 	@Autowired
 	IGameRepository gameRepository;
-	
+
 	@Autowired
 	IClientRepository clientRepository;
-	
+
 	@Override
 	public GameDTO getGamexId(GameRequest request) throws Exception {
-		if(request.getIdJuego()== null || request.getIdJuego()==0) {
-			throw new Exception ("Debe especificar el idJuego para realizar la consulta");
-		}else {
-			return gameRepository.getGamexId(request);
-		}
-		
+		return gameRepository.getGamexId(request);
 	}
 
 	@Override
@@ -42,16 +38,6 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 		return gameRepository.createUpdateGame(request);
 	}
 
-	@Override
-	public ClientResponse registerClient(ClientRequest request) {
-		return clientRepository.registerClient(request);
-	}
-
-	@Override
-	public ClientResponse getClientxDocumento(ClientRequest request) {
-		return clientRepository.getClientxDocumento(request);
-	}
-	
 	@Override
 	public List<MarcaDTO> getMarcas() throws Exception {
 		return gameRepository.getMarcas();
@@ -66,10 +52,27 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	public List<GameDTO> getGames() throws Exception {
 		return gameRepository.getGames();
 	}
-	
+
 	@Override
 	public List<PlataformaDTO> getPlataformas() throws Exception {
 		return gameRepository.getPlataformas();
 	}
 	
+	@Override
+	public List<ClientDTO> getClients() throws Exception {
+		return clientRepository.getClients();
+	}
+	
+	@Override
+	public ClientResponse createUpdateClient(ClientRequest request) throws Exception{
+		return clientRepository.createUpdateClient(request);
+	}
+
+	@Override
+	public ClientDTO getClientxId(ClientRequest request) throws Exception{
+		return clientRepository.getClientxId(request);
+	}
+
+
+
 }
