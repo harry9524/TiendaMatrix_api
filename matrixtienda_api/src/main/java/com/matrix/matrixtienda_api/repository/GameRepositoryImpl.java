@@ -13,6 +13,7 @@ import com.matrix.matrixtienda_api.modelo.GameResponse;
 import com.matrix.matrixtienda_api.modelo.MarcaDTO;
 import com.matrix.matrixtienda_api.modelo.MarcaRequest;
 import com.matrix.matrixtienda_api.modelo.MarcaResponse;
+import com.matrix.matrixtienda_api.modelo.PersonaDTO;
 import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
 import com.matrix.matrixtienda_api.modelo.RolDTO;
 
@@ -133,6 +134,45 @@ public class GameRepositoryImpl implements IGameRepository{
 	}
 
 	@Override
+	public List<PersonaDTO> getPersonas() throws Exception {
+		List<PersonaDTO> personas = jdbcTemplate.query(
+				"SELECT * FROM PERSONAS ",
+				new Object[]{},
+				(rs, rowNum) ->
+				new PersonaDTO(
+						rs.getInt("ID_PERSONA"),
+						rs.getString("NOMBRES"),
+						rs.getString("APELLIDOS")
+						)
+				);
+
+		return personas;
+	}
+	
+	@Override
+	public List<GameDTO> getGamexRolyPersona(PersonaDTO request) throws Exception {
+		List<GameDTO> games = jdbcTemplate.query(
+				" SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
+				" WHERE JUE.ID_MARCA = MAR.ID_MARCA AND ROL_JUE.ID_JUEGO = JUE.ID_JUEGO " + 
+				" AND ROL_JUE.ID_PERSONA = PER.ID_PERSONA AND ROL_JUE.ID_PERSONA = ? AND ROL_JUE.ID_ROL = ? ",
+				new Object[]{request.getIdPersona(), request.getIdRol()},
+				(rs, rowNum) ->
+				new GameDTO(
+						rs.getInt("ID_JUEGO"),
+						rs.getString("NOMBRE"),
+						rs.getString("DESCRIPCION"),
+						rs.getInt("PRECIO_JUEGO"),
+						rs.getInt("PRECIO_ALQUILER"),
+						rs.getInt("ID_MARCA"),
+						rs.getDate("FECHA_LANZAMIENTO"),
+						rs.getString("NOMBRE_MARCA")
+						)
+				);
+
+		return games;
+	}
+	
+	@Override
 	public List<GameDTO> getGames() {
 
 		List<GameDTO> games = jdbcTemplate.query(
@@ -185,6 +225,5 @@ public class GameRepositoryImpl implements IGameRepository{
 
 		return plataformas;
 	}
-
 
 }

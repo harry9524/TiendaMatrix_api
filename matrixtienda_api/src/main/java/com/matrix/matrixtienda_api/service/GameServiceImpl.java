@@ -12,6 +12,7 @@ import com.matrix.matrixtienda_api.modelo.GameResponse;
 import com.matrix.matrixtienda_api.modelo.MarcaDTO;
 import com.matrix.matrixtienda_api.modelo.MarcaRequest;
 import com.matrix.matrixtienda_api.modelo.MarcaResponse;
+import com.matrix.matrixtienda_api.modelo.PersonaDTO;
 import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
 import com.matrix.matrixtienda_api.modelo.RolDTO;
 import com.matrix.matrixtienda_api.repository.IGameRepository;
@@ -22,10 +23,10 @@ public class GameServiceImpl implements IGameService{
 
 	@Autowired
 	IGameRepository gameRepository;
-	
+
 	@Autowired
 	IVentaRepository ventaRepository;
-	
+
 	@Override
 	public GameDTO getGamexId(GameRequest request) throws Exception {
 		return gameRepository.getGamexId(request);
@@ -40,7 +41,7 @@ public class GameServiceImpl implements IGameService{
 	public MarcaResponse createUpdateMarca(MarcaRequest request) throws Exception {
 		return gameRepository.createUpdateMarca(request);
 	}
-	
+
 	@Override
 	public List<MarcaDTO> getMarcas() throws Exception {
 		return gameRepository.getMarcas();
@@ -56,20 +57,24 @@ public class GameServiceImpl implements IGameService{
 		return gameRepository.getGames();
 	}
 
+	public List<GameDTO> getGamexRolyPersona(PersonaDTO request) throws Exception {
+		return gameRepository.getGamexRolyPersona(request);
+	}
+	
 	@Override
 	public List<GameDTO> getGameTop() throws Exception {
-		
+
 		//Se consulta y obtien el id_cliente del cliente que mas transacciones tenga en la tabla de ALQUILER_JUEGOS
 		GameRequest request = new GameRequest();
 		request.setIdJuego(ventaRepository.getGameTop());
-		
+
 		//con este id_cliente usamos el metodo de getClientexId para obtener la información de dicho usuario
 		List<GameDTO> gamesTop = new ArrayList<GameDTO>();
 		GameDTO gameTop = gameRepository.getGamexId(request);
 		gamesTop.add(gameTop);
 		return gamesTop;
 	}
-	
+
 	@Override
 	public List<PlataformaDTO> getPlataformas() throws Exception {
 		return gameRepository.getPlataformas();
@@ -79,5 +84,10 @@ public class GameServiceImpl implements IGameService{
 	public List<PlataformaDTO> getPlataformasxGame(Integer idJuego) throws Exception {
 		return gameRepository.getPlataformasxGame(idJuego);
 	}
-	
+
+	@Override
+	public List<PersonaDTO> getPersonas() throws Exception {
+		return gameRepository.getPersonas();
+	}
+
 }
