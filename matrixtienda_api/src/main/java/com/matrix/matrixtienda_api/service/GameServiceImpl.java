@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
@@ -29,7 +30,9 @@ public class GameServiceImpl implements IGameService{
 
 	@Override
 	public GameDTO getGamexId(GameRequest request) throws Exception {
-		return gameRepository.getGamexId(request);
+		FiltersJuegoDTO filter = new FiltersJuegoDTO();
+		filter.setIdJuego(request.getIdJuego());
+		return gameRepository.getGamexFilters(filter).get(0);
 	}
 
 	@Override
@@ -54,23 +57,25 @@ public class GameServiceImpl implements IGameService{
 
 	@Override
 	public List<GameDTO> getGames() throws Exception {
-		return gameRepository.getGames();
+		FiltersJuegoDTO request = new FiltersJuegoDTO();
+		return gameRepository.getGamexFilters(request);
 	}
 
-	public List<GameDTO> getGamexRolyPersona(PersonaDTO request) throws Exception {
-		return gameRepository.getGamexRolyPersona(request);
+	@Override
+	public List<GameDTO> getGamexFilters(FiltersJuegoDTO request) throws Exception {
+		return gameRepository.getGamexFilters(request);
 	}
 	
 	@Override
 	public List<GameDTO> getGameTop() throws Exception {
 
 		//Se consulta y obtien el id_cliente del cliente que mas transacciones tenga en la tabla de ALQUILER_JUEGOS
-		GameRequest request = new GameRequest();
+		FiltersJuegoDTO request = new FiltersJuegoDTO();
 		request.setIdJuego(ventaRepository.getGameTop());
 
-		//con este id_cliente usamos el metodo de getClientexId para obtener la información de dicho usuario
+		//con este id_juego usamos el metodo de getGamexFilters para obtener la información de dicho juego
 		List<GameDTO> gamesTop = new ArrayList<GameDTO>();
-		GameDTO gameTop = gameRepository.getGamexId(request);
+		GameDTO gameTop = gameRepository.getGamexFilters(request).get(0);
 		gamesTop.add(gameTop);
 		return gamesTop;
 	}

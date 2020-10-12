@@ -11,8 +11,8 @@ import com.matrix.matrixtienda_api.modelo.AlquilarJuegoRequest;
 import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
+import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
-import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.repository.IClientRepository;
 import com.matrix.matrixtienda_api.repository.IGameRepository;
 import com.matrix.matrixtienda_api.repository.IVentaRepository;
@@ -57,9 +57,9 @@ public class VentasServiceImpl implements IVentasService {
 		int diasPrestamo = Math.abs((int) ((fechaactual.getTime()-request.getFechaFinPrestamo().getTime()) / milisecondsByDay));
 		System.err.println("Dìas de Diferencia "+diasPrestamo);
 		
-		GameRequest requestGame = new GameRequest();
+		FiltersJuegoDTO requestGame = new FiltersJuegoDTO();
 		requestGame.setIdJuego(request.getIdJuego());
-		GameDTO gameSeleccionado = gameRepository.getGamexId(requestGame);
+		GameDTO gameSeleccionado = gameRepository.getGamexFilters(requestGame).get(0);
 		
 		int valorPagar = gameSeleccionado.getPrecioAlquilerJuego()*diasPrestamo;
 		

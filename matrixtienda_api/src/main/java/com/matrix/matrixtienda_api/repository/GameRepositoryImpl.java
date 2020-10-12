@@ -7,6 +7,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
@@ -22,31 +23,6 @@ public class GameRepositoryImpl implements IGameRepository{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
-	@Override
-	public GameDTO getGamexId(GameRequest request) throws Exception {
-
-		List<GameDTO> usuarioJuego = jdbcTemplate.query(
-				"SELECT * FROM JUEGOS WHERE ID_JUEGO = ? ",
-				new Object[]{request.getIdJuego()},
-				(rs, rowNum) ->
-				new GameDTO(
-						rs.getInt("ID_JUEGO"),
-						rs.getString("NOMBRE"),
-						rs.getString("DESCRIPCION"),
-						rs.getInt("PRECIO_JUEGO"),
-						rs.getInt("PRECIO_ALQUILER"),
-						rs.getInt("ID_MARCA"),
-						rs.getDate("FECHA_LANZAMIENTO")
-						)
-				);
-
-		if(usuarioJuego.isEmpty()) {
-			throw new Exception("No se encontro un juego con los criterios ingresados");
-		}
-
-		return usuarioJuego.get(0);
-	}
 
 	@Override
 	public GameResponse createUpdateGame(GameRequest request) {
@@ -87,11 +63,11 @@ public class GameRepositoryImpl implements IGameRepository{
 		MarcaResponse response = new MarcaResponse();
 		if(request.getIdMarca()==null || request.getIdMarca()==0) {
 			//Se procede a Crear La Marca de Juego	
-				jdbcTemplate.update(
-						"INSERT INTO MARCAS (NOMBRE) VALUES(?)", 
-						request.getNombreMarca());
+			jdbcTemplate.update(
+					"INSERT INTO MARCAS (NOMBRE) VALUES(?)", 
+					request.getNombreMarca());
 		}
-		
+
 		if(!response.isExitoso() && response.getMensajeError() != null && response.getMensajeError().length()>0) {
 			return response;
 		}else {
@@ -99,7 +75,7 @@ public class GameRepositoryImpl implements IGameRepository{
 			return response;
 		}
 	}
-	
+
 
 	@Override
 	public List<MarcaDTO> getMarcas() {
@@ -148,49 +124,78 @@ public class GameRepositoryImpl implements IGameRepository{
 
 		return personas;
 	}
-	
+
 	@Override
-	public List<GameDTO> getGamexRolyPersona(PersonaDTO request) throws Exception {
-		List<GameDTO> games = jdbcTemplate.query(
-				" SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
-				" WHERE JUE.ID_MARCA = MAR.ID_MARCA AND ROL_JUE.ID_JUEGO = JUE.ID_JUEGO " + 
-				" AND ROL_JUE.ID_PERSONA = PER.ID_PERSONA AND ROL_JUE.ID_PERSONA = ? AND ROL_JUE.ID_ROL = ? ",
-				new Object[]{request.getIdPersona(), request.getIdRol()},
-				(rs, rowNum) ->
-				new GameDTO(
-						rs.getInt("ID_JUEGO"),
-						rs.getString("NOMBRE"),
-						rs.getString("DESCRIPCION"),
-						rs.getInt("PRECIO_JUEGO"),
-						rs.getInt("PRECIO_ALQUILER"),
-						rs.getInt("ID_MARCA"),
-						rs.getDate("FECHA_LANZAMIENTO"),
-						rs.getString("NOMBRE_MARCA")
-						)
-				);
-
-		return games;
-	}
-	
-	@Override
-	public List<GameDTO> getGames() {
-
-		List<GameDTO> games = jdbcTemplate.query(
-				"SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR WHERE JUE.ID_MARCA = MAR.ID_MARCA ",
-				new Object[]{},
-				(rs, rowNum) ->
-				new GameDTO(
-						rs.getInt("ID_JUEGO"),
-						rs.getString("NOMBRE"),
-						rs.getString("DESCRIPCION"),
-						rs.getInt("PRECIO_JUEGO"),
-						rs.getInt("PRECIO_ALQUILER"),
-						rs.getInt("ID_MARCA"),
-						rs.getDate("FECHA_LANZAMIENTO"),
-						rs.getString("NOMBRE_MARCA")
-						)
-				);
-
+	public List<GameDTO> getGamexFilters(FiltersJuegoDTO request) throws Exception {
+		List<GameDTO> games = null;
+		if(request.getIdJuego()!= null &&request.getIdPersona()== null &&request.getIdRol()== null &&request.getIdMarca()== null) {
+			games = jdbcTemplate.query(
+					"SELECT * FROM JUEGOS WHERE ID_JUEGO = ? ",
+					new Object[]{request.getIdJuego()},
+					(rs, rowNum) ->
+					new GameDTO(
+							rs.getInt("ID_JUEGO"),
+							rs.getString("NOMBRE"),
+							rs.getString("DESCRIPCION"),
+							rs.getInt("PRECIO_JUEGO"),
+							rs.getInt("PRECIO_ALQUILER"),
+							rs.getInt("ID_MARCA"),
+							rs.getDate("FECHA_LANZAMIENTO")
+							)
+					);
+		}else if(request.getIdJuego()== null && request.getIdPersona()==null && request.getIdRol()==null && request.getIdMarca()==null) {
+			games = jdbcTemplate.query(
+					"SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR WHERE JUE.ID_MARCA = MAR.ID_MARCA ",
+					new Object[]{},
+					(rs, rowNum) ->
+					new GameDTO(
+							rs.getInt("ID_JUEGO"),
+							rs.getString("NOMBRE"),
+							rs.getString("DESCRIPCION"),
+							rs.getInt("PRECIO_JUEGO"),
+							rs.getInt("PRECIO_ALQUILER"),
+							rs.getInt("ID_MARCA"),
+							rs.getDate("FECHA_LANZAMIENTO"),
+							rs.getString("NOMBRE_MARCA")
+							)
+					);
+		}else if(request.getIdJuego()== null && request.getIdPersona()!=null && request.getIdRol()!=null && request.getIdMarca()==null) {
+			games = jdbcTemplate.query(
+					" SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
+							" WHERE JUE.ID_MARCA = MAR.ID_MARCA AND ROL_JUE.ID_JUEGO = JUE.ID_JUEGO " + 
+							" AND ROL_JUE.ID_PERSONA = PER.ID_PERSONA AND ROL_JUE.ID_PERSONA = ? AND ROL_JUE.ID_ROL = ? ",
+							new Object[]{request.getIdPersona(), request.getIdRol()},
+							(rs, rowNum) ->
+					new GameDTO(
+							rs.getInt("ID_JUEGO"),
+							rs.getString("NOMBRE"),
+							rs.getString("DESCRIPCION"),
+							rs.getInt("PRECIO_JUEGO"),
+							rs.getInt("PRECIO_ALQUILER"),
+							rs.getInt("ID_MARCA"),
+							rs.getDate("FECHA_LANZAMIENTO"),
+							rs.getString("NOMBRE_MARCA")
+							)
+					);
+		}else if(request.getIdJuego()== null && request.getIdPersona()!=null && request.getIdRol()!=null && request.getIdMarca()!=null) {
+			games = jdbcTemplate.query(
+					" SELECT DISTINCT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
+							" WHERE JUE.ID_MARCA = MAR.ID_MARCA AND ROL_JUE.ID_JUEGO = JUE.ID_JUEGO " + 
+							" AND ROL_JUE.ID_PERSONA = PER.ID_PERSONA AND ROL_JUE.ID_PERSONA = ? AND ROL_JUE.ID_ROL = ? AND MAR.ID_MARCA = ? ",
+							new Object[]{request.getIdPersona(), request.getIdRol(), request.getIdMarca() },
+							(rs, rowNum) ->
+					new GameDTO(
+							rs.getInt("ID_JUEGO"),
+							rs.getString("NOMBRE"),
+							rs.getString("DESCRIPCION"),
+							rs.getInt("PRECIO_JUEGO"),
+							rs.getInt("PRECIO_ALQUILER"),
+							rs.getInt("ID_MARCA"),
+							rs.getDate("FECHA_LANZAMIENTO"),
+							rs.getString("NOMBRE_MARCA")
+							)
+					);
+		}
 		return games;
 	}
 
@@ -214,13 +219,13 @@ public class GameRepositoryImpl implements IGameRepository{
 	public List<PlataformaDTO> getPlataformasxGame(Integer IdJuego) throws Exception {
 		List<PlataformaDTO> plataformas = jdbcTemplate.query(
 				" SELECT PLAC.* FROM PLATAFORMAS PLAC, JUEGOS_PLATAFORMA JUEG_PLA WHERE PLAC.ID_PLATAFORMA = JUEG_PLA.ID_PLATAFORMA "
-				+" AND JUEG_PLA.ID_JUEGO = ? ",
-				new Object[]{IdJuego},
-				(rs, rowNum) ->
-				new PlataformaDTO(
-						rs.getInt("ID_PLATAFORMA"),
-						rs.getString("NOMBRE")
-						)
+						+" AND JUEG_PLA.ID_JUEGO = ? ",
+						new Object[]{IdJuego},
+						(rs, rowNum) ->
+						new PlataformaDTO(
+								rs.getInt("ID_PLATAFORMA"),
+								rs.getString("NOMBRE")
+								)
 				);
 
 		return plataformas;

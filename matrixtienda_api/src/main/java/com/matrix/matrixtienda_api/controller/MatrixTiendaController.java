@@ -19,6 +19,7 @@ import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
+import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
@@ -71,18 +72,17 @@ public class MatrixTiendaController {
 			log.info("Entro en el metodo getPersonas");
 			return gameService.getPersonas();
 		}
-		
-		
+			
 		@GetMapping("/getGames")
 		public List<GameDTO> getGames() throws Exception{
 			log.info("Entro en el metodo getGames");
 			return gameService.getGames();
 		}
 		
-		@PostMapping("/getGamexRolyPersona")
-		public List<GameDTO> getGamexRolyPersona(@RequestBody PersonaDTO request) throws Exception{
-			log.info("Entro en el metodo getGamexRolyPersona "+request.toString());
-			return gameService.getGamexRolyPersona(request);
+		@PostMapping("/getGamexFilters")
+		public List<GameDTO> getGamexFilters(@RequestBody FiltersJuegoDTO request) throws Exception{
+			log.info("Entro en el metodo getGamexFilters "+request.toString());
+			return gameService.getGamexFilters(request);
 		}
 		
 		@GetMapping("/getGameTop")
