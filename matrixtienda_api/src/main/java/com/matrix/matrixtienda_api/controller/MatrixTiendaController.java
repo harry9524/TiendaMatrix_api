@@ -70,6 +70,13 @@ public class MatrixTiendaController {
 			return gameService.getGames();
 		}
 		
+		@GetMapping("/getGameTop")
+		public List<GameDTO> getGameTop() throws Exception{
+			log.info("Entro en el metodo getGameTop");
+			return gameService.getGameTop();
+		}
+		
+		
 		@GetMapping("/getClients")
 		public List<ClientDTO> getClients() throws Exception{
 			log.info("Entro en el metodo getClients ");

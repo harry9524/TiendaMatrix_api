@@ -11,5 +11,7 @@ public interface IVentaRepository {
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception;
 	public AlquilarJuegoResponse createUpdateAlquiler (AlquilarJuegoRequest request) throws Exception;
 	public Integer getClientFrecuentyer() throws Exception;
+	public Integer getGameTop() throws Exception;
+	
 	
 }

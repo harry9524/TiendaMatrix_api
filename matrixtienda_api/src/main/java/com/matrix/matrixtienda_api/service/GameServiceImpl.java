@@ -1,5 +1,6 @@
 package com.matrix.matrixtienda_api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ import com.matrix.matrixtienda_api.modelo.MarcaResponse;
 import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
 import com.matrix.matrixtienda_api.modelo.RolDTO;
 import com.matrix.matrixtienda_api.repository.IGameRepository;
+import com.matrix.matrixtienda_api.repository.IVentaRepository;
 
 @Service
 public class GameServiceImpl implements IGameService{
 
 	@Autowired
 	IGameRepository gameRepository;
+	
+	@Autowired
+	IVentaRepository ventaRepository;
 	
 	@Override
 	public GameDTO getGamexId(GameRequest request) throws Exception {
@@ -51,6 +56,20 @@ public class GameServiceImpl implements IGameService{
 		return gameRepository.getGames();
 	}
 
+	@Override
+	public List<GameDTO> getGameTop() throws Exception {
+		
+		//Se consulta y obtien el id_cliente del cliente que mas transacciones tenga en la tabla de ALQUILER_JUEGOS
+		GameRequest request = new GameRequest();
+		request.setIdJuego(ventaRepository.getGameTop());
+		
+		//con este id_cliente usamos el metodo de getClientexId para obtener la información de dicho usuario
+		List<GameDTO> gamesTop = new ArrayList<GameDTO>();
+		GameDTO gameTop = gameRepository.getGamexId(request);
+		gamesTop.add(gameTop);
+		return gamesTop;
+	}
+	
 	@Override
 	public List<PlataformaDTO> getPlataformas() throws Exception {
 		return gameRepository.getPlataformas();
