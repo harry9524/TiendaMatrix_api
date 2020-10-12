@@ -10,6 +10,7 @@ public interface IClientService {
 
 	//Clientes
 	public List<ClientDTO> getClients() throws Exception;	
+	public List<ClientDTO> getClientFrecuentyer() throws Exception;
 	public ClientDTO getClientxId (ClientRequest request) throws Exception;	
 	public ClientResponse createUpdateClient (ClientRequest request) throws Exception;
 

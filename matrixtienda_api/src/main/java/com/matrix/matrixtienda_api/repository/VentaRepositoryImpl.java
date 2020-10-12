@@ -19,6 +19,19 @@ public class VentaRepositoryImpl implements IVentaRepository{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
+	public Integer getClientFrecuentyer() throws Exception {
+		List<Integer> clienteFrecuente = jdbcTemplate.query(
+				" SELECT ID_CLIENTE, COUNT(*) CANTIDAD  FROM ALQUILER_JUEGOS GROUP BY ID_CLIENTE ORDER BY CANTIDAD DESC LIMIT 1 ",
+						new Object[]{},
+						(rs, rowNum) ->
+						new Integer(
+								rs.getInt("ID_CLIENTE")
+								)
+				);
+		return clienteFrecuente.get(0);
+	}
+	
+	@Override
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
 		List<AlquilarJuegoDTO> alquileres = jdbcTemplate.query(
 				" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO, "

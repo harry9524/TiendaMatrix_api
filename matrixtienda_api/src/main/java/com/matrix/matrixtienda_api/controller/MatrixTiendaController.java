@@ -76,6 +76,12 @@ public class MatrixTiendaController {
 			return clientService.getClients();
 		}
 		
+		@GetMapping("/getClientFrecuentyer")
+		public List<ClientDTO> getClientFrecuentyer() throws Exception{
+			log.info("Entro en el metodo getClientFrecuentyer ");
+			return clientService.getClientFrecuentyer();
+		}
+		
 		@GetMapping("/getAlquileres")
 		public List<AlquilarJuegoDTO> getAlquileres() throws Exception{
 			log.info("Entro en el metodo getAlquileres ");
