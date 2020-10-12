@@ -96,6 +96,14 @@ public class MatrixTiendaController {
 			return ventasService.getAlquileres();
 		}
 		
+		@PostMapping("/getAlquileresxFiltro")
+		public List<AlquilarJuegoDTO> getAlquileresxFiltro(@RequestBody AlquilarJuegoRequest request) throws Exception{
+			log.info("Entro en el metodo getAlquileresxFiltro ");
+			return ventasService.getAlquileresxFiltro(request);
+		}
+		
+		
+		
 		@PostMapping("/getValueAlquiler")
 		public AlquilarJuegoDTO getValueAlquiler(@RequestBody AlquilarJuegoRequest request) throws Exception{
 			log.info("Entro en el metodo getValueAlquiler ");

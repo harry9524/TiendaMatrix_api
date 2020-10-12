@@ -35,6 +35,11 @@ public class VentasServiceImpl implements IVentasService {
 	}
 	
 	@Override
+	public List<AlquilarJuegoDTO> getAlquileresxFiltro(AlquilarJuegoRequest request) throws Exception {
+		return ventaRepository.getAlquileresxFiltro(request);
+	}
+	
+	@Override
 	public AlquilarJuegoResponse createUpdateAlquiler(AlquilarJuegoRequest request) throws Exception {
 		ClientRequest clientRequest = new ClientRequest();
 		clientRequest.setDocumentoCliente(request.getDocumentoCliente());

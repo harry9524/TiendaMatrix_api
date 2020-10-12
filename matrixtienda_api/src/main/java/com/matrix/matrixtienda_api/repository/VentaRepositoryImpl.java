@@ -45,6 +45,38 @@ public class VentaRepositoryImpl implements IVentaRepository{
 	}
 	
 	@Override
+	public List<AlquilarJuegoDTO> getAlquileresxFiltro(AlquilarJuegoRequest request) throws Exception {
+		List<AlquilarJuegoDTO> alquileres = null;
+		
+		if(request.getIdAlquiler()==null && request.getFechaInicioPrestamo()==null) {
+			alquileres = jdbcTemplate.query(
+					" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO, "
+					+ " CLI.DOCUMENTO AS DOCUMENTO_CLIENTE, PLAT.NOMBRE AS NOMBRE_PLATAFORMA FROM ALQUILER_JUEGOS VENTAS, CLIENTES CLI, JUEGOS JUEG, "
+					+ " PLATAFORMAS PLAT WHERE ventas.ID_CLIENTE = CLI.ID_CLIENTE AND VENTAS.ID_JUEGO = JUEG.ID_JUEGO AND "
+					+ " VENTAS.ID_PLATAFORMA = PLAT.ID_PLATAFORMA AND VENTAS.FECHA_INICIO_PRESTAMO >= CURRENT_DATE() ",
+							new Object[]{},
+							(rs, rowNum) ->
+							new AlquilarJuegoDTO(
+									rs.getInt("ID_ALQUILER_JUEGO"),
+									rs.getInt("ID_JUEGO"),
+									rs.getString("NOMBRE_JUEGO"),
+									rs.getInt("ID_CLIENTE"),
+									rs.getString("DOCUMENTO_CLIENTE"),
+									rs.getString("NOMBRE_CLIENTE"),
+									rs.getDate("FECHA_INICIO_PRESTAMO"),
+									rs.getDate("FECHA_FIN_PRESTAMO"),
+									rs.getString("CODIGO_COMPRA"),
+									rs.getDate("FECHA_DEVOLUCION"),
+									rs.getInt("VALOR_PAGADO"),
+									rs.getInt("ID_PLATAFORMA"),
+									rs.getString("NOMBRE_PLATAFORMA")
+									)
+					);
+		}
+		return alquileres;
+	}
+	
+	@Override
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
 		List<AlquilarJuegoDTO> alquileres = jdbcTemplate.query(
 				" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO, "

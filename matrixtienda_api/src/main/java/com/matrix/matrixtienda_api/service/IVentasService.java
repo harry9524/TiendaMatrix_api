@@ -10,6 +10,7 @@ public interface IVentasService {
 
 	//Ventas
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception;
+	public List<AlquilarJuegoDTO> getAlquileresxFiltro(AlquilarJuegoRequest request) throws Exception;
 	public AlquilarJuegoResponse createUpdateAlquiler(AlquilarJuegoRequest request) throws Exception;
 	public AlquilarJuegoDTO getValueAlquiler(AlquilarJuegoRequest request) throws Exception;
 	
