@@ -21,8 +21,9 @@ public class VentaRepositoryImpl implements IVentaRepository{
 	@Override
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
 		List<AlquilarJuegoDTO> alquileres = jdbcTemplate.query(
-				" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO FROM "
-						+" ALQUILER_JUEGOS VENTAS, CLIENTES CLI, JUEGOS JUEG WHERE ventas.ID_CLIENTE = CLI.ID_CLIENTE AND VENTAS.ID_JUEGO = JUEG.ID_JUEGO ",
+				" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO, "
+				+ " CLI.DOCUMENTO AS DOCUMENTO_CLIENTE FROM ALQUILER_JUEGOS VENTAS, CLIENTES CLI, JUEGOS JUEG WHERE ventas.ID_CLIENTE = CLI.ID_CLIENTE "
+				+ " AND VENTAS.ID_JUEGO = JUEG.ID_JUEGO ",
 						new Object[]{},
 						(rs, rowNum) ->
 						new AlquilarJuegoDTO(
@@ -33,7 +34,8 @@ public class VentaRepositoryImpl implements IVentaRepository{
 								rs.getString("NOMBRE_CLIENTE"),
 								rs.getDate("FECHA_ALQUILER"),
 								rs.getDate("FECHA_VENCIMIENTO"),
-								rs.getString("CODIGO_COMPRA")
+								rs.getString("CODIGO_COMPRA"),
+								rs.getString("DOCUMENTO_CLIENTE")
 								)
 				);
 

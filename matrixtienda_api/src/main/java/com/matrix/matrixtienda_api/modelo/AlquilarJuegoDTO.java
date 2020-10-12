@@ -11,6 +11,7 @@ public class AlquilarJuegoDTO implements Serializable{
 	private Integer idJuego;
 	private String 	nombreJuego;
 	private Integer idCliente;
+	private String 	documentoCliente;
 	private String 	nombreCliente;
 	private Date 	fechaAlquiler;
 	private Date 	fechaVencimiento;
@@ -19,8 +20,7 @@ public class AlquilarJuegoDTO implements Serializable{
 	public AlquilarJuegoDTO() {};
 	
 	public AlquilarJuegoDTO(Integer idAlquiler, Integer idJuego, String nombreJuego, Integer idCliente, String nombreCliente,
-			Date fechaAlquiler, Date fechaVencimiento, String codigoCompra) {
-		super();
+			Date fechaAlquiler, Date fechaVencimiento, String codigoCompra, String documentoCliente) {
 		this.idAlquiler = idAlquiler;
 		this.idJuego = idJuego;
 		this.nombreJuego = nombreJuego;
@@ -29,6 +29,7 @@ public class AlquilarJuegoDTO implements Serializable{
 		this.fechaAlquiler = fechaAlquiler;
 		this.fechaVencimiento = fechaVencimiento;
 		this.codigoCompra = codigoCompra;
+		this.documentoCliente = documentoCliente;
 	}
 
 	public Integer getIdAlquiler() {
@@ -95,11 +96,20 @@ public class AlquilarJuegoDTO implements Serializable{
 		this.codigoCompra = codigoCompra;
 	}
 
+	public String getDocumentoCliente() {
+		return documentoCliente;
+	}
+
+	public void setDocumentoCliente(String documentoCliente) {
+		this.documentoCliente = documentoCliente;
+	}
+
 	@Override
 	public String toString() {
-		return "AlquilerDTO [idAlquiler=" + idAlquiler + ", idJuego=" + idJuego + ", nombreJuego=" + nombreJuego
-				+ ", idCliente=" + idCliente + ", nombreCliente=" + nombreCliente + ", fechaAlquiler=" + fechaAlquiler
-				+ ", fechaVencimiento=" + fechaVencimiento + ", codigoCompra=" + codigoCompra + "]";
+		return "AlquilarJuegoDTO [idAlquiler=" + idAlquiler + ", idJuego=" + idJuego + ", nombreJuego=" + nombreJuego
+				+ ", idCliente=" + idCliente + ", documentoCliente=" + documentoCliente + ", nombreCliente="
+				+ nombreCliente + ", fechaAlquiler=" + fechaAlquiler + ", fechaVencimiento=" + fechaVencimiento
+				+ ", codigoCompra=" + codigoCompra + "]";
 	}
 	
 }

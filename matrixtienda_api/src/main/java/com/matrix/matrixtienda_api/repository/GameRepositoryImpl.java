@@ -11,6 +11,8 @@ import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
 import com.matrix.matrixtienda_api.modelo.MarcaDTO;
+import com.matrix.matrixtienda_api.modelo.MarcaRequest;
+import com.matrix.matrixtienda_api.modelo.MarcaResponse;
 import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
 import com.matrix.matrixtienda_api.modelo.RolDTO;
 
@@ -47,9 +49,7 @@ public class GameRepositoryImpl implements IGameRepository{
 
 	@Override
 	public GameResponse createUpdateGame(GameRequest request) {
-
 		GameResponse response = new GameResponse();
-
 		if(request.getIdJuego()==null || request.getIdJuego()==0) {
 			//Se procede a Crear el juego	
 
@@ -81,6 +81,24 @@ public class GameRepositoryImpl implements IGameRepository{
 
 	}
 
+	@Override
+	public MarcaResponse createUpdateMarca(MarcaRequest request) throws Exception {
+		MarcaResponse response = new MarcaResponse();
+		if(request.getIdMarca()==null || request.getIdMarca()==0) {
+			//Se procede a Crear La Marca de Juego	
+				jdbcTemplate.update(
+						"INSERT INTO MARCAS (NOMBRE) VALUES(?)", 
+						request.getNombreMarca());
+		}
+		
+		if(!response.isExitoso() && response.getMensajeError() != null && response.getMensajeError().length()>0) {
+			return response;
+		}else {
+			response.setExitoso(true);
+			return response;
+		}
+	}
+	
 
 	@Override
 	public List<MarcaDTO> getMarcas() {
@@ -118,7 +136,7 @@ public class GameRepositoryImpl implements IGameRepository{
 	public List<GameDTO> getGames() {
 
 		List<GameDTO> games = jdbcTemplate.query(
-				"SELECT * FROM JUEGOS ",
+				"SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR WHERE JUE.ID_MARCA = MAR.ID_MARCA ",
 				new Object[]{},
 				(rs, rowNum) ->
 				new GameDTO(
@@ -128,7 +146,8 @@ public class GameRepositoryImpl implements IGameRepository{
 						rs.getInt("PRECIO_JUEGO"),
 						rs.getInt("PRECIO_ALQUILER"),
 						rs.getInt("ID_MARCA"),
-						rs.getDate("FECHA_LANZAMIENTO")
+						rs.getDate("FECHA_LANZAMIENTO"),
+						rs.getString("NOMBRE_MARCA")
 						)
 				);
 

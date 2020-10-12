@@ -13,6 +13,7 @@ public class GameDTO implements Serializable{
 	private Integer precioJuego;
 	private Integer precioAlquilerJuego;
 	private Integer idMarca;
+	private String 	nombreMarca;
 	private Date 	fechaLanzamientoJuego;
 
 	public GameDTO() {}
@@ -26,6 +27,18 @@ public class GameDTO implements Serializable{
 		this.precioAlquilerJuego = precioAlquilerJuego;
 		this.idMarca = idMarca;
 		this.fechaLanzamientoJuego = fechaLanzamientoJuego;
+	}
+	
+	public GameDTO(Integer idJuego, String nombreJuego, String descripcionJuego, Integer precioJuego,
+			Integer precioAlquilerJuego, Integer idMarca, Date fechaLanzamientoJuego, String nombreMarca) {
+		this.idJuego = idJuego;
+		this.nombreJuego = nombreJuego;
+		this.descripcionJuego = descripcionJuego;
+		this.precioJuego = precioJuego;
+		this.precioAlquilerJuego = precioAlquilerJuego;
+		this.idMarca = idMarca;
+		this.fechaLanzamientoJuego = fechaLanzamientoJuego;
+		this.nombreMarca = nombreMarca;
 	}
 
 	public Integer getIdJuego() {
@@ -70,12 +83,18 @@ public class GameDTO implements Serializable{
 	public void setFechaLanzamientoJuego(Date fechaLanzamientoJuego) {
 		this.fechaLanzamientoJuego = fechaLanzamientoJuego;
 	}
+	public String getNombreMarca() {
+		return nombreMarca;
+	}
+	public void setNombreMarca(String nombreMarca) {
+		this.nombreMarca = nombreMarca;
+	}
 
 	@Override
 	public String toString() {
 		return "GameDTO [idJuego=" + idJuego + ", nombreJuego=" + nombreJuego + ", descripcionJuego=" + descripcionJuego
-				+ ", precioJuego=" + precioJuego + ", precioAlquilerJuego=" + precioAlquilerJuego
-				+ ", idMarca=" + idMarca + ", fechaLanzamientoJuego=" + fechaLanzamientoJuego + "]";
+				+ ", precioJuego=" + precioJuego + ", precioAlquilerJuego=" + precioAlquilerJuego + ", idMarca="
+				+ idMarca + ", nombreMarca=" + nombreMarca + ", fechaLanzamientoJuego=" + fechaLanzamientoJuego + "]";
 	}
 
 }
