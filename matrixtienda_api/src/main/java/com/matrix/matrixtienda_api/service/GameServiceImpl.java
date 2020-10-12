@@ -74,5 +74,10 @@ public class GameServiceImpl implements IGameService{
 	public List<PlataformaDTO> getPlataformas() throws Exception {
 		return gameRepository.getPlataformas();
 	}
+
+	@Override
+	public List<PlataformaDTO> getPlataformasxGame(Integer idJuego) throws Exception {
+		return gameRepository.getPlataformasxGame(idJuego);
+	}
 	
 }

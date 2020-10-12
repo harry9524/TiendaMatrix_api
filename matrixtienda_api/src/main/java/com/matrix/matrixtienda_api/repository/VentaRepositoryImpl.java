@@ -48,8 +48,9 @@ public class VentaRepositoryImpl implements IVentaRepository{
 	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
 		List<AlquilarJuegoDTO> alquileres = jdbcTemplate.query(
 				" SELECT VENTAS.*, CONCAT(CLI.PRIMER_NOMBRE,' ',CLI.PRIMER_APELLIDO) AS NOMBRE_CLIENTE , JUEG.NOMBRE NOMBRE_JUEGO, "
-				+ " CLI.DOCUMENTO AS DOCUMENTO_CLIENTE FROM ALQUILER_JUEGOS VENTAS, CLIENTES CLI, JUEGOS JUEG WHERE ventas.ID_CLIENTE = CLI.ID_CLIENTE "
-				+ " AND VENTAS.ID_JUEGO = JUEG.ID_JUEGO ",
+				+ " CLI.DOCUMENTO AS DOCUMENTO_CLIENTE, PLAT.NOMBRE AS NOMBRE_PLATAFORMA FROM ALQUILER_JUEGOS VENTAS, CLIENTES CLI, JUEGOS JUEG, "
+				+ " PLATAFORMAS PLAT WHERE ventas.ID_CLIENTE = CLI.ID_CLIENTE AND VENTAS.ID_JUEGO = JUEG.ID_JUEGO AND "
+				+ " VENTAS.ID_PLATAFORMA = PLAT.ID_PLATAFORMA ",
 						new Object[]{},
 						(rs, rowNum) ->
 						new AlquilarJuegoDTO(
@@ -57,11 +58,15 @@ public class VentaRepositoryImpl implements IVentaRepository{
 								rs.getInt("ID_JUEGO"),
 								rs.getString("NOMBRE_JUEGO"),
 								rs.getInt("ID_CLIENTE"),
+								rs.getString("DOCUMENTO_CLIENTE"),
 								rs.getString("NOMBRE_CLIENTE"),
-								rs.getDate("FECHA_ALQUILER"),
-								rs.getDate("FECHA_VENCIMIENTO"),
+								rs.getDate("FECHA_INICIO_PRESTAMO"),
+								rs.getDate("FECHA_FIN_PRESTAMO"),
 								rs.getString("CODIGO_COMPRA"),
-								rs.getString("DOCUMENTO_CLIENTE")
+								rs.getDate("FECHA_DEVOLUCION"),
+								rs.getInt("VALOR_PAGADO"),
+								rs.getInt("ID_PLATAFORMA"),
+								rs.getString("NOMBRE_PLATAFORMA")
 								)
 				);
 
@@ -95,9 +100,10 @@ public class VentaRepositoryImpl implements IVentaRepository{
 			//Se procede a Crear el juego	
 
 			jdbcTemplate.update(
-					"INSERT INTO ALQUILER_JUEGOS (ID_JUEGO, ID_CLIENTE, FECHA_ALQUILER, FECHA_VENCIMIENTO, CODIGO_COMPRA) VALUES(?,?,?,?,?)", 
-					request.getIdJuego(), request.getIdCliente(), new Date(), new Date(), codigoGenerado);
-
+					"INSERT INTO ALQUILER_JUEGOS (ID_JUEGO, ID_CLIENTE, VALOR_PAGADO, FECHA_INICIO_PRESTAMO, FECHA_FIN_PRESTAMO, CODIGO_COMPRA, "
+					+ "ID_PLATAFORMA ) VALUES(?,?,?,?,?,?,?)", 
+					request.getIdJuego(), request.getIdCliente(),  request.getValorPagado(), new Date(), request.getFechaFinPrestamo(), codigoGenerado,
+					request.getIdPlataforma());
 		}
 
 		if(!response.isExitoso() && response.getMensajeError() != null && response.getMensajeError().length()>0) {

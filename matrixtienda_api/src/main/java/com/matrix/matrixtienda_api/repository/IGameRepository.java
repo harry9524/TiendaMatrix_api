@@ -14,6 +14,7 @@ import com.matrix.matrixtienda_api.modelo.RolDTO;
 public interface IGameRepository {
 
 	public GameDTO getGamexId(GameRequest request) throws Exception;
+	public List<PlataformaDTO> getPlataformasxGame(Integer idJuego) throws Exception;
 	public GameResponse createUpdateGame(GameRequest request) throws Exception;
 	public MarcaResponse createUpdateMarca (MarcaRequest request) throws Exception;
 	public List<MarcaDTO> getMarcas() throws Exception;

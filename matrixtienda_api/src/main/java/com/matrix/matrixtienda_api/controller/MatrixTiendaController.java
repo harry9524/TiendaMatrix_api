@@ -22,6 +22,7 @@ import com.matrix.matrixtienda_api.modelo.ClientResponse;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
 import com.matrix.matrixtienda_api.modelo.GameResponse;
+import com.matrix.matrixtienda_api.modelo.GenericoResponse;
 import com.matrix.matrixtienda_api.modelo.MarcaDTO;
 import com.matrix.matrixtienda_api.modelo.MarcaRequest;
 import com.matrix.matrixtienda_api.modelo.MarcaResponse;
@@ -95,6 +96,12 @@ public class MatrixTiendaController {
 			return ventasService.getAlquileres();
 		}
 		
+		@PostMapping("/getValueAlquiler")
+		public AlquilarJuegoDTO getValueAlquiler(@RequestBody AlquilarJuegoRequest request) throws Exception{
+			log.info("Entro en el metodo getValueAlquiler ");
+			return ventasService.getValueAlquiler(request);
+		}
+		
 		@PostMapping("/createUpdateGame")
 		public GameResponse createUpdateGame(@RequestBody GameRequest request) throws Exception{
 			log.info("Entro en el metodo createUpdateGame "+request.toString());
@@ -127,12 +134,24 @@ public class MatrixTiendaController {
 			return gameService.getGamexId(request);
 		}
 		
+		@GetMapping("/getPlataformasxGame/{idJuego}")
+		public List<PlataformaDTO> getPlataformasxGame(@PathVariable("idJuego") Integer idJuego) throws Exception{
+			log.info("Entro en el metodo getPlataformasxGame "+idJuego);
+			return gameService.getPlataformasxGame(idJuego);
+		}
+		
 		@GetMapping("/getClientxId/{idCliente}")
 		public ClientDTO getClientxId(@PathVariable("idCliente") Integer idCliente) throws Exception{
 			log.info("Entro en el metodo getClientxId "+idCliente);
 			ClientRequest request = new ClientRequest();
 			request.setIdCliente(idCliente);
 			return clientService.getClientxId(request);
+		}
+		
+		@GetMapping("/validateClient/{documentoCliente}")
+		public GenericoResponse validteClient(@PathVariable("documentoCliente") String documentoCliente) throws Exception{
+			log.info("Entro en el metodo validteClient "+documentoCliente);
+			return clientService.validteClient(documentoCliente);
 		}
 		
 		

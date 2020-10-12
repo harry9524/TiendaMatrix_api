@@ -157,7 +157,7 @@ public class GameRepositoryImpl implements IGameRepository{
 	@Override
 	public List<PlataformaDTO> getPlataformas() {
 
-		List<PlataformaDTO> games = jdbcTemplate.query(
+		List<PlataformaDTO> plataformas = jdbcTemplate.query(
 				"SELECT * FROM PLATAFORMAS ",
 				new Object[]{},
 				(rs, rowNum) ->
@@ -167,7 +167,23 @@ public class GameRepositoryImpl implements IGameRepository{
 						)
 				);
 
-		return games;
+		return plataformas;
+	}
+
+	@Override
+	public List<PlataformaDTO> getPlataformasxGame(Integer IdJuego) throws Exception {
+		List<PlataformaDTO> plataformas = jdbcTemplate.query(
+				" SELECT PLAC.* FROM PLATAFORMAS PLAC, JUEGOS_PLATAFORMA JUEG_PLA WHERE PLAC.ID_PLATAFORMA = JUEG_PLA.ID_PLATAFORMA "
+				+" AND JUEG_PLA.ID_JUEGO = ? ",
+				new Object[]{IdJuego},
+				(rs, rowNum) ->
+				new PlataformaDTO(
+						rs.getInt("ID_PLATAFORMA"),
+						rs.getString("NOMBRE")
+						)
+				);
+
+		return plataformas;
 	}
 
 

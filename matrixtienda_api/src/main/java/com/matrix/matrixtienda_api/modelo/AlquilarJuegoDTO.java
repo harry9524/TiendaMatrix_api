@@ -13,23 +13,64 @@ public class AlquilarJuegoDTO implements Serializable{
 	private Integer idCliente;
 	private String 	documentoCliente;
 	private String 	nombreCliente;
-	private Date 	fechaAlquiler;
-	private Date 	fechaVencimiento;
+	private Date 	fechaInicioPrestamo;
+	private Date 	fechaFinPrestamo;
 	private String 	codigoCompra;
+	private Date 	fechaDevolucion;
+	private Integer valorPagado;
+	private Integer idPlataforma;
+	private String 	nombrePlataforma;
 	
 	public AlquilarJuegoDTO() {};
-	
-	public AlquilarJuegoDTO(Integer idAlquiler, Integer idJuego, String nombreJuego, Integer idCliente, String nombreCliente,
-			Date fechaAlquiler, Date fechaVencimiento, String codigoCompra, String documentoCliente) {
+
+	public AlquilarJuegoDTO(Integer idAlquiler, Integer idJuego, String nombreJuego, Integer idCliente,
+			String documentoCliente, String nombreCliente, Date fechaInicioPrestamo, Date fechaFinPrestamo,
+			String codigoCompra, Date fechaDevolucion, Integer valorPagado, Integer idPlataforma,
+			String nombrePlataforma) {
 		this.idAlquiler = idAlquiler;
 		this.idJuego = idJuego;
 		this.nombreJuego = nombreJuego;
 		this.idCliente = idCliente;
-		this.nombreCliente = nombreCliente;
-		this.fechaAlquiler = fechaAlquiler;
-		this.fechaVencimiento = fechaVencimiento;
-		this.codigoCompra = codigoCompra;
 		this.documentoCliente = documentoCliente;
+		this.nombreCliente = nombreCliente;
+		this.fechaInicioPrestamo = fechaInicioPrestamo;
+		this.fechaFinPrestamo = fechaFinPrestamo;
+		this.codigoCompra = codigoCompra;
+		this.fechaDevolucion = fechaDevolucion;
+		this.valorPagado = valorPagado;
+		this.idPlataforma = idPlataforma;
+		this.nombrePlataforma = nombrePlataforma;
+	}
+
+	public Integer getValorPagado() {
+		return valorPagado;
+	}
+
+	public void setValorPagado(Integer valorPagado) {
+		this.valorPagado = valorPagado;
+	}
+	public Date getFechaInicioPrestamo() {
+		return fechaInicioPrestamo;
+	}
+
+	public void setFechaInicioPrestamo(Date fechaInicioPrestamo) {
+		this.fechaInicioPrestamo = fechaInicioPrestamo;
+	}
+
+	public Date getFechaFinPrestamo() {
+		return fechaFinPrestamo;
+	}
+
+	public void setFechaFinPrestamo(Date fechaFinPrestamo) {
+		this.fechaFinPrestamo = fechaFinPrestamo;
+	}
+
+	public Date getFechaDevolucion() {
+		return fechaDevolucion;
+	}
+
+	public void setFechaDevolucion(Date fechaDevolucion) {
+		this.fechaDevolucion = fechaDevolucion;
 	}
 
 	public Integer getIdAlquiler() {
@@ -72,22 +113,6 @@ public class AlquilarJuegoDTO implements Serializable{
 		this.nombreCliente = nombreCliente;
 	}
 
-	public Date getFechaAlquiler() {
-		return fechaAlquiler;
-	}
-
-	public void setFechaAlquiler(Date fechaAlquiler) {
-		this.fechaAlquiler = fechaAlquiler;
-	}
-
-	public Date getFechaVencimiento() {
-		return fechaVencimiento;
-	}
-
-	public void setFechaVencimiento(Date fechaVencimiento) {
-		this.fechaVencimiento = fechaVencimiento;
-	}
-
 	public String getCodigoCompra() {
 		return codigoCompra;
 	}
@@ -104,12 +129,30 @@ public class AlquilarJuegoDTO implements Serializable{
 		this.documentoCliente = documentoCliente;
 	}
 
+	public Integer getIdPlataforma() {
+		return idPlataforma;
+	}
+
+	public void setIdPlataforma(Integer idPlataforma) {
+		this.idPlataforma = idPlataforma;
+	}
+
+	public String getNombrePlataforma() {
+		return nombrePlataforma;
+	}
+
+	public void setNombrePlataforma(String nombrePlataforma) {
+		this.nombrePlataforma = nombrePlataforma;
+	}
+
 	@Override
 	public String toString() {
 		return "AlquilarJuegoDTO [idAlquiler=" + idAlquiler + ", idJuego=" + idJuego + ", nombreJuego=" + nombreJuego
 				+ ", idCliente=" + idCliente + ", documentoCliente=" + documentoCliente + ", nombreCliente="
-				+ nombreCliente + ", fechaAlquiler=" + fechaAlquiler + ", fechaVencimiento=" + fechaVencimiento
-				+ ", codigoCompra=" + codigoCompra + "]";
+				+ nombreCliente + ", fechaInicioPrestamo=" + fechaInicioPrestamo + ", fechaFinPrestamo="
+				+ fechaFinPrestamo + ", codigoCompra=" + codigoCompra + ", fechaDevolucion=" + fechaDevolucion
+				+ ", valorPagado=" + valorPagado + ", idPlataforma=" + idPlataforma + ", nombrePlataforma="
+				+ nombrePlataforma + "]";
 	}
-	
+
 }

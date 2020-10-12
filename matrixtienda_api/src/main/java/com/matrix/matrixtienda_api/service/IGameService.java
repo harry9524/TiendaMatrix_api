@@ -19,7 +19,8 @@ public interface IGameService {
 	public List<RolDTO> getRoles() throws Exception;
 	public List<GameDTO> getGames() throws Exception;	
 	public List<GameDTO> getGameTop() throws Exception;
-	public GameDTO getGamexId (GameRequest request) throws Exception;	
+	public GameDTO getGamexId (GameRequest request) throws Exception;
+	public List<PlataformaDTO> getPlataformasxGame(Integer idJuego) throws Exception;
 	public GameResponse createUpdateGame (GameRequest request) throws Exception;
 	public MarcaResponse createUpdateMarca (MarcaRequest request) throws Exception;
 

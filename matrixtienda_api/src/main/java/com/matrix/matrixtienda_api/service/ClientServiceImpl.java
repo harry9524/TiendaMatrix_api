@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
+import com.matrix.matrixtienda_api.modelo.GenericoResponse;
 import com.matrix.matrixtienda_api.repository.IClientRepository;
 import com.matrix.matrixtienda_api.repository.IVentaRepository;
 
@@ -48,6 +49,11 @@ public class ClientServiceImpl implements IClientService{
 		ClientDTO clientFrecuente = clientRepository.getClientxId(request);
 		clienteFrecuente.add(clientFrecuente);
 		return clienteFrecuente;
+	}
+
+	@Override
+	public GenericoResponse validteClient(String documentoCliente) throws Exception {
+		return clientRepository.validteClient(documentoCliente);
 	}
 	
 }
