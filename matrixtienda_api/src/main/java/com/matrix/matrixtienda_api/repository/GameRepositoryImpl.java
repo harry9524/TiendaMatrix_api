@@ -56,7 +56,7 @@ public class GameRepositoryImpl implements IGameRepository{
 			try {
 				jdbcTemplate.update(
 						"INSERT INTO JUEGOS (NOMBRE, DESCRIPCION, PRECIO_JUEGO, PRECIO_ALQUILER, ID_MARCA, FECHA_LANZAMIENTO) VALUES(?,?,?,?,?,?)", 
-						request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuegoJuego(), request.getPrecioAlquilerJuego(), 
+						request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuego(), request.getPrecioAlquilerJuego(), 
 						request.getIdMarca(), request.getFechaLanzamientoJuego());
 			} catch (DuplicateKeyException e) {
 				response.setExitoso(false);
@@ -68,7 +68,7 @@ public class GameRepositoryImpl implements IGameRepository{
 
 			jdbcTemplate.update(
 					"UPDATE JUEGOS SET NOMBRE = ?, DESCRIPCION = ?, PRECIO_JUEGO=?, PRECIO_ALQUILER=?, ID_MARCA=?, FECHA_LANZAMIENTO=? WHERE ID_JUEGO = ? ", 
-					request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuegoJuego(), request.getPrecioAlquilerJuego(), request.getIdMarca(),
+					request.getNombreJuego(), request.getDescripcionJuego(), request.getPrecioJuego(), request.getPrecioAlquilerJuego(), request.getIdMarca(),
 					request.getFechaLanzamientoJuego(), request.getIdJuego());
 		}
 

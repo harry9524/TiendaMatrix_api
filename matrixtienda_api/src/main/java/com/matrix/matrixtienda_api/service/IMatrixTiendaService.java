@@ -2,6 +2,9 @@ package com.matrix.matrixtienda_api.service;
 
 import java.util.List;
 
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoDTO;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoRequest;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
@@ -27,4 +30,8 @@ public interface IMatrixTiendaService {
 	public ClientDTO getClientxId (ClientRequest request) throws Exception;	
 	public ClientResponse createUpdateClient (ClientRequest request) throws Exception;
 		
+	//Ventas
+	public List<AlquilarJuegoDTO> getAlquileres() throws Exception;
+	public AlquilarJuegoResponse createUpdateAlquiler(AlquilarJuegoRequest request) throws Exception;
+	
 }

@@ -1,7 +1,11 @@
 package com.matrix.matrixtienda_api.modelo;
 
-public class ClientDTO {
+import java.io.Serializable;
 
+public class ClientDTO implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private Integer idCliente;
 	private String documentoCliente;
 	private String tipoDocumentoCliente;

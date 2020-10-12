@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoDTO;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoRequest;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
@@ -77,6 +80,18 @@ public class MatrixTiendaController {
 			return service.getClients();
 		}
 		
+		@GetMapping("/getAlquileres")
+		public List<AlquilarJuegoDTO> getAlquileres() throws Exception{
+			log.info("Entro en el metodo getAlquileres ");
+			return service.getAlquileres();
+		}
+		
+		@PostMapping("/createUpdateAlquiler")
+		public AlquilarJuegoResponse createUpdateAlquiler(@RequestBody AlquilarJuegoRequest request) throws Exception{
+			log.info("Entro en el metodo createUpdateAlquiler "+request.toString());
+			return service.createUpdateAlquiler(request);
+		}
+		
 		@PostMapping("/createUpdateClient")
 		public ClientResponse createUpdateClient(@RequestBody ClientRequest request) throws Exception{
 			log.info("Entro en el metodo createUpdateClient "+request.toString());
@@ -90,4 +105,6 @@ public class MatrixTiendaController {
 			request.setIdCliente(idCliente);
 			return service.getClientxId(request);
 		}
+		
+		
 }

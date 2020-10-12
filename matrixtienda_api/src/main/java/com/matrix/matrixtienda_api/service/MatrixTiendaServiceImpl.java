@@ -1,11 +1,13 @@
 package com.matrix.matrixtienda_api.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoDTO;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoRequest;
+import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
@@ -17,6 +19,7 @@ import com.matrix.matrixtienda_api.modelo.PlataformaDTO;
 import com.matrix.matrixtienda_api.modelo.RolDTO;
 import com.matrix.matrixtienda_api.repository.IClientRepository;
 import com.matrix.matrixtienda_api.repository.IGameRepository;
+import com.matrix.matrixtienda_api.repository.IVentaRepository;
 
 @Service
 public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
@@ -27,6 +30,9 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	@Autowired
 	IClientRepository clientRepository;
 
+	@Autowired
+	IVentaRepository ventaRepository;
+	
 	@Override
 	public GameDTO getGamexId(GameRequest request) throws Exception {
 		return gameRepository.getGamexId(request);
@@ -59,6 +65,16 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	}
 	
 	@Override
+	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
+		return ventaRepository.getAlquileres();
+	}
+	
+	@Override
+	public AlquilarJuegoResponse createUpdateAlquiler(AlquilarJuegoRequest request) throws Exception {
+		return ventaRepository.createUpdateAlquiler(request);
+	}
+	
+	@Override
 	public List<ClientDTO> getClients() throws Exception {
 		return clientRepository.getClients();
 	}
@@ -72,7 +88,5 @@ public class MatrixTiendaServiceImpl implements IMatrixTiendaService {
 	public ClientDTO getClientxId(ClientRequest request) throws Exception{
 		return clientRepository.getClientxId(request);
 	}
-
-
 
 }
