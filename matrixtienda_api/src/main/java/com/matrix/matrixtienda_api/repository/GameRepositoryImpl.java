@@ -161,7 +161,7 @@ public class GameRepositoryImpl implements IGameRepository{
 					);
 		}else if(request.getIdJuego()== null && request.getIdPersona()!=null && request.getIdRol()!=null && request.getIdMarca()==null) {
 			games = jdbcTemplate.query(
-					" SELECT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
+					" SELECT DISTINCT JUE.*, MAR.NOMBRE AS NOMBRE_MARCA FROM JUEGOS JUE, MARCAS MAR, ROL_JUEGO ROL_JUE, PERSONAS PER " + 
 							" WHERE JUE.ID_MARCA = MAR.ID_MARCA AND ROL_JUE.ID_JUEGO = JUE.ID_JUEGO " + 
 							" AND ROL_JUE.ID_PERSONA = PER.ID_PERSONA AND ROL_JUE.ID_PERSONA = ? AND ROL_JUE.ID_ROL = ? ",
 							new Object[]{request.getIdPersona(), request.getIdRol()},
