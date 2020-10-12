@@ -11,6 +11,7 @@ import com.matrix.matrixtienda_api.modelo.AlquilarJuegoRequest;
 import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
+import com.matrix.matrixtienda_api.modelo.FiltersAlquileresDTO;
 import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.repository.IClientRepository;
@@ -28,14 +29,9 @@ public class VentasServiceImpl implements IVentasService {
 	
 	@Autowired
 	IClientRepository clientRepository;
-	
+		
 	@Override
-	public List<AlquilarJuegoDTO> getAlquileres() throws Exception {
-		return ventaRepository.getAlquileres();
-	}
-	
-	@Override
-	public List<AlquilarJuegoDTO> getAlquileresxFiltro(AlquilarJuegoRequest request) throws Exception {
+	public List<AlquilarJuegoDTO> getAlquileresxFiltro(FiltersAlquileresDTO request) throws Exception {
 		return ventaRepository.getAlquileresxFiltro(request);
 	}
 	

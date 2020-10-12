@@ -128,7 +128,7 @@ public class GameRepositoryImpl implements IGameRepository{
 	@Override
 	public List<GameDTO> getGamexFilters(FiltersJuegoDTO request) throws Exception {
 		List<GameDTO> games = null;
-		if(request.getIdJuego()!= null &&request.getIdPersona()== null &&request.getIdRol()== null &&request.getIdMarca()== null) {
+		if(request.getIdJuego()!= null && request.getIdPersona()== null && request.getIdRol()== null && request.getIdMarca()== null) {
 			games = jdbcTemplate.query(
 					"SELECT * FROM JUEGOS WHERE ID_JUEGO = ? ",
 					new Object[]{request.getIdJuego()},

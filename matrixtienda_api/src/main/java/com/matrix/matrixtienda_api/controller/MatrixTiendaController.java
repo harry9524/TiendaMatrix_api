@@ -19,6 +19,7 @@ import com.matrix.matrixtienda_api.modelo.AlquilarJuegoResponse;
 import com.matrix.matrixtienda_api.modelo.ClientDTO;
 import com.matrix.matrixtienda_api.modelo.ClientRequest;
 import com.matrix.matrixtienda_api.modelo.ClientResponse;
+import com.matrix.matrixtienda_api.modelo.FiltersAlquileresDTO;
 import com.matrix.matrixtienda_api.modelo.FiltersJuegoDTO;
 import com.matrix.matrixtienda_api.modelo.GameDTO;
 import com.matrix.matrixtienda_api.modelo.GameRequest;
@@ -106,12 +107,21 @@ public class MatrixTiendaController {
 		@GetMapping("/getAlquileres")
 		public List<AlquilarJuegoDTO> getAlquileres() throws Exception{
 			log.info("Entro en el metodo getAlquileres ");
-			return ventasService.getAlquileres();
+			FiltersAlquileresDTO request = new FiltersAlquileresDTO();
+			return ventasService.getAlquileresxFiltro(request);
+		}
+		
+		@GetMapping("/getAlquileres/{documentoCliente}")
+		public List<AlquilarJuegoDTO> getAlquileres(@PathVariable("documentoCliente") String documentoCliente) throws Exception{
+			log.info("Entro en el metodo getAlquileres "+documentoCliente);
+			FiltersAlquileresDTO request = new FiltersAlquileresDTO();
+			request.setDocumentoCliente(documentoCliente);
+			return ventasService.getAlquileresxFiltro(request);
 		}
 		
 		@PostMapping("/getAlquileresxFiltro")
-		public List<AlquilarJuegoDTO> getAlquileresxFiltro(@RequestBody AlquilarJuegoRequest request) throws Exception{
-			log.info("Entro en el metodo getAlquileresxFiltro ");
+		public List<AlquilarJuegoDTO> getAlquileresxFiltro(@RequestBody FiltersAlquileresDTO request) throws Exception{
+			log.info("Entro en el metodo getAlquileresxFiltro "+request.toString());
 			return ventasService.getAlquileresxFiltro(request);
 		}
 		
